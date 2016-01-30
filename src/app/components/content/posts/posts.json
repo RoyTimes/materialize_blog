@@ -27,7 +27,7 @@
 
 				"excerpt" : "大概好长时间之前我编辑了一下生成的脚本，之后产生了一个可以生成置顶post的功能，但是当初没有看到的问题就是只会置顶每个Page上的文章，假如说我的文章特别多，之后首页上出现了两页文章。那么就出现问题了，因为置顶的是每页的，所以说假如说一篇置顶文章正常排列到了第二页，那么就出现了逗比的第二页置顶文章的情况。于是今晚我花了3个小时处理这个Bug。2333"
 		}, {
-				"name": "{NEW} How I created a blog System (1)",
+				"name": "{NEW} How did I creat a blog System (1)",
 				"url": "/posts/web/3",
 				"category_url": "3",
 				"category": "web",
@@ -37,7 +37,7 @@
 
 				"excerpt" : "自我介绍一下。我叫ZS，高三出国党。JavaScript粉。过去5天时间里狂码1500行JSX代码构建了一个超级轻量的博客单页应用。才用了React.js作为基础库，Material Design做UI。今天是2015-01-22. 最基础的工作都完成了，博客已经可以投入使用了。作为第一篇我介绍一下背景知识啥的。写一篇我仔细写全部的过程。"
 		}, {
-				"name": "{NEW} How I created a blog System (2)",
+				"name": "{NEW} How did I creat a blog System (2)",
 				"url": "/posts/web/4",
 				"category_url": "4",
 				"category": "web",
@@ -46,6 +46,16 @@
 				"time": "2016-01-22",
 
 				"excerpt" : "第二篇主要介绍一下博客软件的细节。还有未来我希望有的功能一类的。"
+		}, {
+				"name": "{NEW} How did I creat a blog System (3)",
+				"url": "/posts/web/5",
+				"category_url": "5",
+				"category": "web",
+				"markdown_number": 22,
+				"markdown": "/web/5",
+				"time": "2016-01-23",
+
+				"excerpt" : "第三篇。开始谈谈技术细节"
 		}
 		]
 	}, {
@@ -138,17 +148,6 @@
 				"time": "2015-08-20",
 
 				"excerpt" : "我用Sublime Text的主要原因其实是因为当初需要长期使用Linux的原因，最开始使用Gedit。因为一切都需要手动进行非常不开心，编译什么的需要敲一万个命令，之后时间越长越觉得那个高亮实在是不好看，后来有人告诉我赶紧用VIM吧，后来才知道坑爹的这货说的VIM是一款命令行的文本编辑器，看了文档之后心里凉了半截，大神们请不要喷我弱弱的用不起VIM。当时我还在OI竞赛的坑里，很要求效率，这吊玩意学个几个月我也就费了。于是后来就用了Sublime Text. 因为大多数人用这个写Web，所以归类到WebDev好了。"
-			}, {
-				"name": "{PIN} 到底该怎么做技术人员",
-				"top": "true",
-				"url": "/posts/general/4",
-				"category_url": "4",
-				"category": "general",
-				"markdown_number": 21,
-				"markdown": "/general/4",
-				"time": "2016-01-22",
-
-				"excerpt" : "最近我也仔细想了一下，技术人员到底以后该怎么发展。这篇文章我就想以一个轻松的语调谈一谈这个故事。提前说两个词。CS (Computer Science)并不是儿时的射击游戏。CE (Computer Engineer)一个更贴近硬件编程的专业，跟CS挺像然而后期完全不同甚至完全两个方向。"
 			}
 
 		]
@@ -244,6 +243,17 @@
 				"time": "2016-01-16",
 
 				"excerpt" :"随意写写，要不要发到空间上看心情。"
+			},{
+				"name": "{PIN} 到底该怎么做技术人员",
+				"top": "true",
+				"url": "/posts/passwd/7",
+				"category_url": "7",
+				"category": "passwd",
+				"markdown_number": 21,
+				"markdown": "/passwd/7",
+				"time": "2016-01-22",
+
+				"excerpt" : "最近我也仔细想了一下，技术人员到底以后该怎么发展。这篇文章我就想以一个轻松的语调谈一谈这个故事。提前说两个词。CS (Computer Science)并不是儿时的射击游戏。CE (Computer Engineer)一个更贴近硬件编程的专业，跟CS挺像然而后期完全不同甚至完全两个方向。"
 			}
 
 

@@ -8,11 +8,12 @@ const Loading = React.createClass({
 	},
 	style: {
         progress: {
-            marginTop: "12%",
-            marginLeft: "44%"
+            marginTop: "20%",
+            marginLeft: "46%"
         }, paper:{
             height: 600
         }, text: {
+			lineHeight: 1.1,
 			fontWeight: "normal",
             color: "#757575",
             marginTop: 50,

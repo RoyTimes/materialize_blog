@@ -1,4 +1,5 @@
 import React from 'react';
+
 import MarkdownElement from '../../partial/MarkdownElement';
 import Loading from '../../partial/loading';
 
@@ -17,21 +18,17 @@ const Post = React.createClass({
         let that = this;
         $.ajax({
             type: "GET",
-            url: "https://raw.githubusercontent.com/RoyTimes/markdown/master" + this.props.post.markdown + ".md",
+            url: `https://raw.githubusercontent.com/RoyTimes/markdown/master${this.props.post.markdown}.md`,
             success: function(data){
-                if (that.isMounted()) {
-                    that.setState({
-                        loaded: true,
-                        MarkdownText:data
-                    })
-                }
+                if (that.isMounted())
+                    that.setState({loaded: true, MarkdownText:data})
             }
         });
     },
     render(){
         if (!this.state.loaded) {
             return(
-                <Loading title="Server is doing Ajax. Trying hard to load post!" />);
+                <Loading title="Doing Ajax! Trying hard to load post!" />);
         }
         return (<MarkdownElement text={this.state.MarkdownText} />);
     }
