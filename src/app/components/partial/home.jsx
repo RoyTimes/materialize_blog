@@ -83,7 +83,7 @@ const HomePage = React.createClass({
           <h2 style={styles.h2}>
             <br/>
 
-            Blog crafted by @Song&nbsp;Zhou. Unauthorized use of any content is strictly prohibited.<br/><br/><span style={{color:"#f48fb1",fontWeight:"normal"}}>First release of source code would be avilable on Github @Jan 22!</span>
+            Blog crafted by @Song&nbsp;Zhou. Unauthorized use of any content is strictly prohibited.<br/><br/><span style={{color:"#f48fb1",fontWeight:"normal"}}></span>
           </h2>
           <RaisedButton
             className="demo-button"
