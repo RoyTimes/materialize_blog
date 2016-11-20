@@ -27,7 +27,7 @@ router.get('/by_id', (req, res) => {
 router.post('/add', (req, res) => {
 	let {name, avatar} = req.body;
 
-	let newAuthor = new Page({
+	let newAuthor = new Author({
 		name: name, avatar: avatar
 	});
 

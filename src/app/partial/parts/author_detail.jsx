@@ -3,6 +3,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import AjaxChecker from '../router/ajax_checker';
 import Section from './section';
 import Loading from './loading';
 
@@ -15,7 +16,10 @@ const AuthorDetail = React.createClass ({
 	},
 	getInitialState (){
 		return {
-			ready: false, data: {}
+			ready: false, data: {
+				name: "",
+				avatar: ""
+			}
 		}
 	},
 	style: {
@@ -30,10 +34,24 @@ const AuthorDetail = React.createClass ({
 	},
 	componentDidMount () {
 		if (this.props.author != "new") {
+			let ctx = this;
 			$.ajax({
-				
-			})
+				url: "http://" + ctx.context.server_name + "/author/by_id",
+				data: {id: this.props.author}, success (data) {
+					AjaxChecker (data);
+					ctx.setState({ready: true, data: data.data});
+				}
+			});
 		}
+	},
+	creatNew () {
+		let ctx = this;
+		$.ajax ({
+			url: "http://" + ctx.context.server_name + "/author/add",
+			method: "POST", data: this.state.data, success(data) {
+				alert(data);
+			}
+		});
 	},
 	render () {
 
@@ -41,13 +59,28 @@ const AuthorDetail = React.createClass ({
 			return (
 			<Section style={this.style.container}>
 				<TextField
+					value={this.state.data.name}
 					hintText="Name"
-					floatingLabelText="Name" />
+					floatingLabelText="Name"
+					onChange={(evt) => {
+						let data = this.state.data;
+						data.name = evt.target.value;
+						this.setState ({data: data});
+					}}
+				/>
 				<TextField
+					value={this.state.data.avatar}
 					hintText="Avatar"
-					floatingLabelText="Avatar" /> <br/><br/><br/>
-				<RaisedButton label="Add New Author" primary={true}
-						style={this.style.button}/>
+					floatingLabelText="Avatar"
+					onChange={(evt) => {
+						let data = this.state.data;
+						data.avatar = evt.target.value;
+						this.setState ({data: data});
+					}}
+				/> <br/><br/><br/>
+				<RaisedButton
+					label="Add New Author" primary={true}
+					style={this.style.button} onTouchTap={this.creatNew}/>
 			</Section>);
 		} else {
 			if (this.state.ready)
