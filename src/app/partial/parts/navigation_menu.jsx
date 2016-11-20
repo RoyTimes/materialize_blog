@@ -32,7 +32,7 @@ const NavigationMenu = React.createClass({
 			<Drawer docked={true} containerStyle={this.style.drawer}>
 				<SelectableList onChange={(evt, value) => {
 					this.context.router.push(value);
-				}}>
+				}} value={location.pathname}>
 					<Subheader>Categories</Subheader>
 					<ListItem
 						primaryText="ALL POSTS"

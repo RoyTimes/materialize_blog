@@ -6,6 +6,7 @@ import Loading from '../parts/loading';
 import NavigationMenu from '../parts/navigation_menu';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+import AjaxChecker from './ajax_checker';
 import config from '../../config.json';
 const server_name = config.remote_server + ":" + config.remote_port;
 
@@ -14,10 +15,15 @@ const Master = React.createClass({
 	/* something about new material_ui: you need to create a muiTheme
 	which is totally fucking useless */
 	childContextTypes: {
-		muiTheme: React.PropTypes.object
+		muiTheme: React.PropTypes.object,
+		server_name: React.PropTypes.string
 	},
+
 	getChildContext() {
-		return {muiTheme: this.state.muiTheme};
+		return {
+			muiTheme: this.state.muiTheme,
+			server_name: server_name
+		};
 	},
 	componentWillMount () {
 		this.setState({
@@ -47,7 +53,7 @@ const Master = React.createClass({
 		$.ajax({
 			url: "http://" + server_name + "/category/all",
 			method: "GET", success (data) {
-				if (!data.status) ctx.setState({error: "Loading Data Failed .. "})
+				AjaxChecker (data);
 				ctx.setState({isReady: true, categories: data.data});
 			}
 		});

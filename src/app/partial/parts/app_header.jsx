@@ -34,7 +34,7 @@ const AppHeader = React.createClass({
 
 		let title = "Blog";
 		if (this.props.admin) {
-			title = "Blog Admin";
+			title = "Blog   Admin   Panel";
 
 			this.style.appbar.background = Colors.grey700;
 		} else {
