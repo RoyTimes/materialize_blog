@@ -46,10 +46,12 @@ const AuthorDetail = React.createClass ({
 	},
 	creatNew () {
 		let ctx = this;
+
+		console.log(this.state.data);
 		$.ajax ({
 			url: "http://" + ctx.context.server_name + "/author/add",
 			method: "POST", data: this.state.data, success(data) {
-				alert(data);
+				alert(data.msg);
 			}
 		});
 	},

@@ -25,17 +25,16 @@ router.get('/by_id', (req, res) => {
 });
 
 router.post('/add', (req, res) => {
-	let {name, avatar} = req.body;
-
+	let {nick_name, full_name, avatar} = req.body;
 	let newAuthor = new Author({
-		name: name, avatar: avatar
+		nick_name: nick_name, full_name: full_name, avatar: avatar
 	});
 
 	newAuthor.save(err => {
 		if (err) HandleErrorIfAny(err, req, res);
 		else res.json({
 			status: 1, data: {},
-			msg: "Add New Post Success ... "
+			msg: "Add New Author Success ... "
 		});
 	});
 });
@@ -46,22 +45,23 @@ router.post('/del', (req, res) => {
 		if (err) HandleErrorIfAny(err, req, res);
 		else res.json({
 			status: 1, data: {},
-			msg: "Delete Post Success ... "
+			msg: "Delete Author Success ... "
 		});
 	});
 });
 
 router.post('/update', (req, res) => {
-	let {id, name, avatar} = req.body;
+	let {id, nick_name, full_name, avatar} = req.body;
 	Author.findById(id, (err, doc) => {
 		if (err) HandleErrorIfAny(err);
 		else {
-			doc.name = name; doc.avatar = avatar;
+			doc.nick_name = nick_name; doc.avatar = avatar;
+			doc.full_name = full_name;
 			doc.save(err => {
 				if (err) HandleErrorIfAny(err);
 				else res.json({
 					status: 1, data: {},
-					msg: "Update Post Success ... "
+					msg: "Update Author Success ... "
 				});
 			})
 		}
