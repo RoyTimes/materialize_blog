@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, hashHistory} from 'react-router';
 import AppRoutes from './router.jsx';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 ReactDOM.render(

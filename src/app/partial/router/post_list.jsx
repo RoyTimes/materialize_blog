@@ -2,6 +2,9 @@ import React from 'react';
 import Loading from '../parts/loading';
 import PostExcerpt from '../parts/post_excerpt';
 
+import config from '../../config.json';
+const server_name = config.remote_server + ":" + config.remote_port;
+
 const PostList = React.createClass({
 
 	getInitialState() {
@@ -16,7 +19,7 @@ const PostList = React.createClass({
 
 		if (category == "") {
 			$.ajax({
-				url: "http://localhost:8080/posts/all", method: "GET",
+				url: "http://" + server_name + "/posts/all", method: "GET",
 				success(data) {
 					if (!data.status)
 						ctx.setState({error: "Fetching Data Failed ... "});

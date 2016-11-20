@@ -6,6 +6,9 @@ import Loading from '../parts/loading';
 import NavigationMenu from '../parts/navigation_menu';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+import config from '../../config.json';
+const server_name = config.remote_server + ":" + config.remote_port;
+
 const Master = React.createClass({
 
 	/* something about new material_ui: you need to create a muiTheme
@@ -42,8 +45,8 @@ const Master = React.createClass({
 	componentDidMount() {
 		let ctx = this;
 		$.ajax({
-			url: "http://localhost:8080/category/all", method: "GET",
-			success (data) {
+			url: "http://" + server_name + "/category/all",
+			method: "GET", success (data) {
 				if (!data.status) ctx.setState({error: "Loading Data Failed .. "})
 				ctx.setState({isReady: true, categories: data.data});
 			}
@@ -52,15 +55,15 @@ const Master = React.createClass({
 	render() {
 		if (this.state.isReady){
 			return (<div>
-				<AppHeader title="Blog"></AppHeader>
+
 
 				{(() => {
 					if (location.href.indexOf("admin") < 0) {
 						return (
 						<div>
+							<AppHeader admin={false} />
 							<NavigationMenu
-							categories={this.state.categories}
-							history={this.props.history}/>
+								categories={this.state.categories} />
 
 							<div style={this.style.container}>
 								{this.props.children}
@@ -71,6 +74,7 @@ const Master = React.createClass({
 					} else {
 						return (
 							<div>
+								<AppHeader admin={true}/>
 								{this.props.children}
 								<AppFooter />
 							</div>);
