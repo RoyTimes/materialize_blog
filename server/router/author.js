@@ -14,6 +14,15 @@ router.get('/all', (req, res) => {
 			msg: "query success ... " });
 	});
 });
+router.get('/by_id', (req, res) => {
+	let {id} = req.body;
+	Author.findById(id, (err, doc) => {
+		if (err) HandleErrorIfAny(err, req, res);
+		else res.json({
+			status: 1, data: doc,
+			msg: "query success ... " });
+	});
+});
 
 router.post('/add', (req, res) => {
 	let {name, avatar} = req.body;
