@@ -38,7 +38,7 @@ const AdminHome = React.createClass({
 		}, section_title: {
 			color: Colors.grey800
 		}, one_block: {
-			width: "40%", float: "left", minHeight: 400,
+			width: "40%", float: "left", minHeight: 500,
 			marginLeft: "3%", marginRight: "3%", marginBottom: "3%"
 		}
 	},
@@ -133,28 +133,21 @@ const AdminHome = React.createClass({
 							<ListItem
 								value="new"
 								primaryText="ADD A NEW AUTHOR"
+								secondaryText=" "
 								leftAvatar={
 									<Avatar>+</Avatar>}
 
 							/>
 
-							<ListItem
-								value="AA"
-								primaryText="AAA AAA"
-								leftAvatar={<Avatar src="" />}
-
-							/>
-							<ListItem
-								value="BB"
-								primaryText="BBB BBBB"
-								leftAvatar={<Avatar src="" />}
-
-							/>
-							<ListItem
-								value="CC"
-								primaryText="CCC CCCC"
-								leftAvatar={<Avatar src="" />}
-							/>
+							{this.state.author.map (item => {
+								return (<ListItem
+									value={item._id}
+									primaryText={item.nick_name}
+									secondaryText={item.full_name}
+									leftAvatar={
+										<Avatar src={item.avatar}/>}
+								/>)
+							})}
 						</SelectableList>
 					</Paper>
 

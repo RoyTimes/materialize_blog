@@ -12,12 +12,14 @@ const AuthorDetail = React.createClass ({
 		author: React.PropTypes.string
 	},
 	contextTypes: {
-		server_name: React.PropTypes.string
+		server_name: React.PropTypes.string,
+		router: React.PropTypes.object
 	},
 	getInitialState (){
 		return {
 			ready: false, data: {
-				name: "",
+				nick_name: "",
+				full_name: "",
 				avatar: ""
 			}
 		}
@@ -32,9 +34,11 @@ const AuthorDetail = React.createClass ({
 
 		}
 	},
-	componentDidMount () {
+
+	componentDidUpdate () {
 		if (this.props.author != "new") {
 			let ctx = this;
+			alert (this.props.author);
 			$.ajax({
 				url: "http://" + ctx.context.server_name + "/author/by_id",
 				data: {id: this.props.author}, success (data) {
@@ -46,12 +50,11 @@ const AuthorDetail = React.createClass ({
 	},
 	creatNew () {
 		let ctx = this;
-
-		console.log(this.state.data);
 		$.ajax ({
 			url: "http://" + ctx.context.server_name + "/author/add",
 			method: "POST", data: this.state.data, success(data) {
 				alert(data.msg);
+				ctx.context.router.push("/admin");
 			}
 		});
 	},
@@ -61,12 +64,22 @@ const AuthorDetail = React.createClass ({
 			return (
 			<Section style={this.style.container}>
 				<TextField
-					value={this.state.data.name}
-					hintText="Name"
-					floatingLabelText="Name"
+					value={this.state.data.nick_name}
+					hintText="Nick Name"
+					floatingLabelText="Nick Name"
 					onChange={(evt) => {
 						let data = this.state.data;
-						data.name = evt.target.value;
+						data.nick_name = evt.target.value;
+						this.setState ({data: data});
+					}}
+				/>
+				<TextField
+					value={this.state.data.full_name}
+					hintText="Full Name"
+					floatingLabelText="Full Name"
+					onChange={(evt) => {
+						let data = this.state.data;
+						data.full_name = evt.target.value;
 						this.setState ({data: data});
 					}}
 				/>
@@ -85,13 +98,45 @@ const AuthorDetail = React.createClass ({
 					style={this.style.button} onTouchTap={this.creatNew}/>
 			</Section>);
 		} else {
-			if (this.state.ready)
+			if (this.state.ready) {
 				return (
 					<Section style={this.style.container}>
-						{this.props.author}
+						<TextField
+							value={this.state.data.nick_name}
+							hintText="Nick Name"
+							floatingLabelText="Nick Name"
+							onChange={(evt) => {
+								let data = this.state.data;
+								data.nick_name = evt.target.value;
+								this.setState ({data: data});
+							}}
+						/>
+						<TextField
+							value={this.state.data.full_name}
+							hintText="Full Name"
+							floatingLabelText="Full Name"
+							onChange={(evt) => {
+								let data = this.state.data;
+								data.full_name = evt.target.value;
+								this.setState ({data: data});
+							}}
+						/>
+						<TextField
+							value={this.state.data.avatar}
+							hintText="Avatar"
+							floatingLabelText="Avatar"
+							onChange={(evt) => {
+								let data = this.state.data;
+								data.avatar = evt.target.value;
+								this.setState ({data: data});
+							}}
+						/> <br/><br/><br/>
+						<RaisedButton
+							label="Add New Author" primary={true}
+							style={this.style.button} onTouchTap={this.creatNew}/>
 					</Section>
 				);
-			else return <CircularProgress style={this.style.progress}
+			} else return <CircularProgress style={this.style.progress}
 				mode="indeterminate" size={150} thickness={8} />
 		}
 	}
