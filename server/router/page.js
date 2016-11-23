@@ -36,7 +36,7 @@ router.post('/add', (req, res) => {
 		if (err) HandleErrorIfAny(err, req, res);
 		else res.json({
 			status: 1, data: {},
-			msg: "Add New Post Success ... "
+			msg: "Add New Page Success ... "
 		});
 	});
 });
@@ -47,7 +47,7 @@ router.post('/del', (req, res) => {
 		if (err) HandleErrorIfAny(err, req, res);
 		else res.json({
 			status: 1, data: {},
-			msg: "Delete Post Success ... "
+			msg: "Delete Page Success ... "
 		});
 	});
 });
@@ -62,7 +62,7 @@ router.post('/update', (req, res) => {
 				if (err) HandleErrorIfAny(err);
 				else res.json({
 					status: 1, data: {},
-					msg: "Update Post Success ... "
+					msg: "Update Page Success ... "
 				});
 			})
 		}

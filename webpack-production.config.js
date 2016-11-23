@@ -12,16 +12,14 @@ const config = {
     //Webpack config options on how to obtain modules
     resolve: {
         //When requiring, you don't need to add these extensions
-        extensions: ['', '.js', '.jsx', '.md', '.txt'],
+        extensions: ['', '.js', '.jsx'],
 
         //Modules will be searched for in these directories
         modulesDirectories: [
             // We need /docs/node_modules to be resolved before /node_modules
             path.resolve(__dirname, 'node_modules'),
             'node_modules',
-            path.resolve(__dirname, '../src'),
-            path.resolve(__dirname, 'src/app/components/raw-code'),
-            path.resolve(__dirname, 'src/app/components/markdown'),
+            path.resolve(__dirname, '../src')
         ],
     },
     devtool: 'source-map',
@@ -69,15 +67,6 @@ const config = {
         fs: 'fs', // To remove once https://github.com/benjamn/recast/pull/238 is released
     },
     module: {
-        //eslint loader
-        preLoaders: [{
-            test: /\.(js|jsx)$/,
-            loader: 'eslint-loader',
-            include: [path.resolve(__dirname, '../src')],
-            exclude: [
-                path.resolve(__dirname, '../src/svg-icons'),
-            ],
-        }, ],
         //Allow loading of non-es5 js files.
         loaders: [{
             test: /\.(js|jsx)$/,
@@ -86,22 +75,8 @@ const config = {
         }, {
             test: /\.json$/,
             loader: 'json-loader',
-        }, {
-            test: /\.txt$/,
-            loader: 'raw-loader',
-            include: path.resolve(__dirname, 'src/app/components/raw-code'),
-        }, {
-            test: /\.md$/,
-            loader: 'raw-loader',
-            include: path.resolve(__dirname, 'src/app/components'),
-        }, {
-            test: /\.css$/,
-            loader: 'style-loader!css-loader',
-        }, ],
-    },
-    eslint: {
-        configFile: '../.eslintrc',
-    },
+        }],
+    }
 };
 
 module.exports = config;

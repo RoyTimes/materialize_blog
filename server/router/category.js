@@ -17,16 +17,16 @@ router.get('/all', (req, res) => {
 
 router.post('/add', (req, res) => {
 	let {title, index, password, logo} = req.body;
-	let newCategory = new Page({
+	let newCategory = new Category({
 		title: title, index: index,
-		password: password, logo: logo, url: url
+		password: password, logo: logo
 	});
 
 	newCategory.save(err => {
 		if (err) HandleErrorIfAny(err, req, res);
 		else res.json({
 			status: 1, data: {},
-			msg: "Add New Post Success ... "
+			msg: "Add New Category Success ... "
 		});
 	});
 });
@@ -37,7 +37,7 @@ router.post('/del', (req, res) => {
 		if (err) HandleErrorIfAny(err, req, res);
 		else res.json({
 			status: 1, data: {},
-			msg: "Delete Post Success ... "
+			msg: "Delete Category Success ... "
 		});
 	});
 });
@@ -48,12 +48,12 @@ router.post('/update', (req, res) => {
 		if (err) HandleErrorIfAny(err);
 		else {
 			doc.title = title; doc.index = index;
-			doc.password = password;
+			doc.password = password; doc.logo = logo;
 			doc.save(err => {
 				if (err) HandleErrorIfAny(err);
 				else res.json({
 					status: 1, data: {},
-					msg: "Update Post Success ... "
+					msg: "Update Category Success ... "
 				});
 			})
 		}
