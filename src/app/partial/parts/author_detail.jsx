@@ -30,9 +30,7 @@ const AuthorDetail = React.createClass ({
 			marginTop: "25%"
 		}, container: {
 			marginLeft: "3%"
-		}, button: {
-
-		}
+		}, button: { }
 	},
 
 	componentDidUpdate () {
@@ -43,6 +41,7 @@ const AuthorDetail = React.createClass ({
 				url: "http://" + ctx.context.server_name + "/author/by_id",
 				data: {id: this.props.author}, success (data) {
 					AjaxChecker (data);
+					console.log(data);
 					ctx.setState({ready: true, data: data.data});
 				}
 			});
@@ -71,8 +70,7 @@ const AuthorDetail = React.createClass ({
 						let data = this.state.data;
 						data.nick_name = evt.target.value;
 						this.setState ({data: data});
-					}}
-				/>
+					}} /> <br/>
 				<TextField
 					value={this.state.data.full_name}
 					hintText="Full Name"
@@ -81,8 +79,7 @@ const AuthorDetail = React.createClass ({
 						let data = this.state.data;
 						data.full_name = evt.target.value;
 						this.setState ({data: data});
-					}}
-				/>
+					}} /> <br/>
 				<TextField
 					value={this.state.data.avatar}
 					hintText="Avatar"
@@ -91,8 +88,7 @@ const AuthorDetail = React.createClass ({
 						let data = this.state.data;
 						data.avatar = evt.target.value;
 						this.setState ({data: data});
-					}}
-				/> <br/><br/><br/>
+					}} /> <br/><br/><br/>
 				<RaisedButton
 					label="Add New Author" primary={true}
 					style={this.style.button} onTouchTap={this.creatNew}/>
@@ -109,8 +105,7 @@ const AuthorDetail = React.createClass ({
 								let data = this.state.data;
 								data.nick_name = evt.target.value;
 								this.setState ({data: data});
-							}}
-						/>
+							}} />
 						<TextField
 							value={this.state.data.full_name}
 							hintText="Full Name"
@@ -119,8 +114,7 @@ const AuthorDetail = React.createClass ({
 								let data = this.state.data;
 								data.full_name = evt.target.value;
 								this.setState ({data: data});
-							}}
-						/>
+							}} />
 						<TextField
 							value={this.state.data.avatar}
 							hintText="Avatar"
@@ -129,8 +123,7 @@ const AuthorDetail = React.createClass ({
 								let data = this.state.data;
 								data.avatar = evt.target.value;
 								this.setState ({data: data});
-							}}
-						/> <br/><br/><br/>
+							}} /> <br/><br/><br/>
 						<RaisedButton
 							label="Add New Author" primary={true}
 							style={this.style.button} onTouchTap={this.creatNew}/>

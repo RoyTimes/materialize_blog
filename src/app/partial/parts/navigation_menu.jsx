@@ -22,7 +22,7 @@ const NavigationMenu = React.createClass({
 	},
 	style: {
 		drawer: {
-			paddingTop: "6%"
+			paddingTop: "3%"
 		}, iconStyle: {
 			marginRight: 24
 		}

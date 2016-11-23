@@ -23,21 +23,16 @@ const AdminHome = React.createClass({
 			padding: "2%", width: "44%",
 			float: "left", marginLeft: "3%",
 			marginRight: "3%"
-		}, innerTitle: {
-			width: "20%"
-		}, title: {
+		}, innerTitle: { width: "20%" }, title: {
 			color: Colors.grey700, fontSize: 20,
 			textAlign: "center", marginTop: "1%"
 		}, large_container: {
 			padding: "2%", float: "left", width: "94%", minHeight: 300,
 			marginLeft: "3%", marginRight: "3%", marginTop: "5%"
-		}, toggle: {
-			width: "80%"
-		}, button: {
-			marginLeft: "15%"
-		}, section_title: {
-			color: Colors.grey800
-		}, one_block: {
+		}, toggle: { width: "80%" },
+		button: { marginLeft: "15%"},
+		section_title: { color: Colors.grey800},
+		one_block: {
 			width: "40%", float: "left", minHeight: 500,
 			marginLeft: "3%", marginRight: "3%", marginBottom: "3%"
 		}
@@ -111,14 +106,6 @@ const AdminHome = React.createClass({
 				</Paper>
 
 				<Paper style={this.style.large_container}>
-					<div style={this.style.title}>
-
-						<div style={this.style.innerTitle}>
-							<span style={this.style.section_title}>
-								Authors</span>
-							<br/><br/><Divider/><br/>
-						</div>
-					</div>
 
 					<Paper style={this.style.one_block}>
 
@@ -134,10 +121,7 @@ const AdminHome = React.createClass({
 								value="new"
 								primaryText="ADD A NEW AUTHOR"
 								secondaryText=" "
-								leftAvatar={
-									<Avatar>+</Avatar>}
-
-							/>
+								leftAvatar={<Avatar>+</Avatar>} />
 
 							{this.state.author.map (item => {
 								return (<ListItem
