@@ -15,7 +15,7 @@ router.get('/all', (req, res) => {
 	});
 });
 router.get('/by_id', (req, res) => {
-	let {id} = req.body;
+	let {id} = req.query;
 	Author.findById(id, (err, doc) => {
 		if (err) HandleErrorIfAny(err, req, res);
 		else res.json({
