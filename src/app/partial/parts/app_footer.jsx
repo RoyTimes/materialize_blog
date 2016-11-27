@@ -6,7 +6,7 @@ import * as Colors from './colors';
 const AppFooter = React.createClass({
 	style: {
 		footer: {
-			marginTop: "6%", marginLeft: "20%",
+			marginTop: "6%", marginLeft: "10%",
 			marginRight: "0%", marginBottom: "3%",
 			textAlign: 'center',
 			backgroundColor: Colors.grey900,

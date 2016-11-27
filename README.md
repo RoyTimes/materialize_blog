@@ -1,5 +1,7 @@
 ### A React.js & Material UI based Blog system
 
+#### I am currently rework most parts of this project. I have been busy the past few months and Material-UI API changed significantly. 
+
 #### Not work perfectly on mobile devices (especially those with small screen). Trying to fix that right now.
 
 #### Feature
