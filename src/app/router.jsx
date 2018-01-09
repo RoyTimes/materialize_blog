@@ -11,8 +11,6 @@ import About from './partial/router/about';
 import AdminHome from './partial/router/admin/admin_home';
 import PostAdmin from './partial/router/admin/post_admin';
 import EditPost from './partial/router/admin/edit_post';
-import PageAdmin from './partial/router/admin/page_admin';
-import EditPage from './partial/router/admin/edit_page';
 import CategoryAdmin from './partial/router/admin/category_admin';
 
 
