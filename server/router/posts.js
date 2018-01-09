@@ -25,6 +25,17 @@ router.get('/by_category', (req, res) => {
 	})
 });
 
+router.get ('/by_id', (req, res) => {
+	let {id} = req.query;
+	Post.findById (id, (err, doc) => {
+		if (err) HandleErrorIfAny (err, req, res);
+		else res.json ({
+			status: 1, data: doc,
+			msg: "query success ... "
+		});
+	});
+});
+
 router.get('/by_author', (req, res) => {
 	let {id} = req.query;
 	Post.find({author: id}, (err, docs) => {

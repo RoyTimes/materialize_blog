@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import AppHeader from '../parts/app_header';
 import AppFooter from '../parts/app_footer';
@@ -8,31 +8,31 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import AjaxChecker from './ajax_checker';
 import config from '../../config.json';
-const server_name = config.remote_server + ":" + config.remote_port;
+const server_name = "http://localhost:8080";
 
-const Master = React.createClass({
+class Master extends Component {
 
-	/* something about new material_ui: you need to create a muiTheme
-	which is totally fucking useless */
-	childContextTypes: {
-		muiTheme: React.PropTypes.object,
-		server_name: React.PropTypes.string
-	},
+	static childContextTypes = {
+		muiTheme: React.PropTypes.object
+	};
+
+	static contextTypes = {
+		router: React.PropTypes.object
+	};
 
 	getChildContext() {
 		return {
-			muiTheme: this.state.muiTheme,
-			server_name: server_name
+			muiTheme: this.state.muiTheme
 		};
-	},
-	componentWillMount () {
+	}; 
+
+	componentWillMount() {
 		this.setState({
 			muiTheme: getMuiTheme()
 		});
-	},
-	// END OF BS
+	};
 
-	style: {
+	style = {
 		container: {
 			marginTop: "7%", marginLeft: "22%",
 			marginRight: "2%", marginBottom: "3%",
@@ -44,56 +44,47 @@ const Master = React.createClass({
 			marginTop: "7%", marginLeft: "18%",
 			marginRight: "2%", marginBottom: "3%"
 		}
-	},
-	getInitialState() {
-		return {isReady: false, error: "", categories: []};
-	},
+	};
+
+	constructor () {
+		super();
+		this.state = { isReady: false, error: "", categories: [] };
+	};
+
 	componentDidMount() {
-		let ctx = this;
-		$.ajax({
-			url: "http://" + server_name + "/category/all",
-			method: "GET", success (data) {
-				AjaxChecker (data);
-				ctx.setState({isReady: true, categories: data.data});
-			}
+		fetch(server_name + "/category/all").then(AjaxChecker)
+			.then(res => {
+				let data = res.data;
+				this.setState({ isReady: true, categories: data, error: res.msg });
+		}).catch (err => {
+			console.error(err);
 		});
-	},
-	render() {
-		if (this.state.isReady){
-			return (<div>
+	};
 
-
-				{(() => {
-					if (location.href.indexOf("admin") < 0) {
-						return (
-						<div>
-							<AppHeader admin={false} />
-							<NavigationMenu
-								categories={this.state.categories} />
-
-							<div style={this.style.container}>
-								{this.props.children}
-							</div>
-
-							<AppFooter />
-						</div>);
-					} else {
-						return (
-							<div>
-								<AppHeader admin={true}/>
-								{this.props.children}
-								<AppFooter />
-							</div>);
-					}
-				})()}
-			</div>);
+	render () {
+		if (this.state.isReady) {
+			if (this.context.router.isActive('admin')) {
+				return (
+					<div>
+						<AppHeader admin={true} />
+						{this.props.children}
+						<AppFooter />
+					</div>);
+			} else {
+				return (<div>
+					<AppHeader admin={false} />
+					<NavigationMenu
+						categories={this.state.categories} />
+					<div style={this.style.container}>
+						{this.props.children}
+					</div>
+					<AppFooter />
+				</div>)
+			}
 		} else if (this.state.error)
-			return <Loading title={this.state.error}/>;
-		else return <Loading title="Loading Content ... "/>;
+			return <Loading title={this.state.error} key="err_master" />;
+		else return <Loading title="Loading Content ... " key="loading_master" />;
 	}
-});
-
-
-// {this.props.children}
-//
+}
 export default Master;
+

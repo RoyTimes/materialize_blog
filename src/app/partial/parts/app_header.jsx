@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import {Link} from 'react-router';
@@ -11,63 +11,65 @@ import IconMenu from 'material-ui/IconMenu';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import MenuItem from 'material-ui/MenuItem';
 
-const AppHeader = React.createClass({
-	PropTypes: {
+class AppHeader extends Component {
+	static PropTypes = {
 		admin: React.PropTypes.boolean
-	},
-	contextTypes: {
-		router: React.PropTypes.func.isRequired
-	},
-	style: {
+	};
+
+	static contextTypes = {
+		router: React.PropTypes.object
+	};
+
+	style = {
 		appbar: {
 			position: "fixed", top: 0, zIndex: 1400
-		}, link: {
-			textDecoration: "none"
-		}, button: {
+		}
+	};
+
+	render() {ß
+
+		let title_placeholder = "Blog";
+		if (this.props.admin) {
+			title_placeholder = "Blog    Admin    Panel";
+			this.style.appbar.background = Colors.grey700;
+		} else this.style.appbar.background = "rgb(0,188,212)";
+
+		return <AppBar showMenuIconButton={false} style={this.style.appbar} 
+			title={title_placeholder} iconElementRight={<AppBarIcons router={this.context.router}/>} zDepth={0}/>;
+	}
+}
+
+class AppBarIcons extends Component {
+
+	static PropTypes = {
+		router: React.PropTypes.object
+	};
+
+	style = {
+		button: {
 			position: "relative", paddingLeft: 16, paddingRight: 16,
 			marginRight: 10, marginTop: 5,
 			color: Colors.darkWhite
 		}
-	},
+	};
 
-	render() {
-
-		let title = "Blog";
-		if (this.props.admin) {
-			title = "Blog   Admin   Panel";
-
-			this.style.appbar.background = Colors.grey700;
+	render () {
+		if (location.href.split('#')[1] == '/') {
+			return (<div></div>);
 		} else {
-			this.style.appbar.background = "rgb(0,188,212)"
+			return (<div>
+				<FlatButton label="Admin" style={this.style.button} onTouchTap={()=>{
+					this.props.router.push("/admin");
+				}}/>
+				<FlatButton label="Home" style={this.style.button} onTouchTap={()=>{
+					this.props.router.push("/");
+				}}/>
+				<FlatButton label="Logout" 	style={this.style.button} onTouchTap={()=>{
+					// $.removeCookie("user");
+					this.props.router.push("/");
+				}}/>
+			</div>);
 		}
-
-		return (<AppBar
-			showMenuIconButton={false}
-			style={this.style.appbar}
-			title={title}
-			iconElementRight={
-				<div> {(() => {
-					if (location.href.split('#')[1] == '/') {
-						return (<div></div>);
-					} else {
-						return (<div>
-							<FlatButton label="Admin" style={this.style.button} onTouchTap={()=>{
-								this.context.router.push("/admin");
-							}}/>
-							<FlatButton label="Home" style={this.style.button} onTouchTap={()=>{
-								this.context.router.push("/");
-							}}/>
-							<FlatButton label="Logout" 	style={this.style.button} onTouchTap={()=>{
-								$.removeCookie("user");
-								// $.cookie("user", "");
-								this.context.router.push("/");
-							}}/>
-						</div>);
-					}
-				})()}</div>
-			}
-			zDepth={0}
-		/>);
 	}
-});
+}
 export default AppHeader;

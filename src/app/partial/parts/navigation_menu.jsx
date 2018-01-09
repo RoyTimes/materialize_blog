@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import Loading from './loading';
 
@@ -12,42 +12,54 @@ import FontIcon from 'material-ui/FontIcon';
 import ActionLabel from 'material-ui/svg-icons/action/label';
 
 const SelectableList = makeSelectable(List);
-const NavigationMenu = React.createClass({
-	PropTypes: {
+class NavigationMenu extends Component {
+	static PropTypes = {
 		categories: React.PropTypes.array,
-		history: React.PropTypes.object
-	},
-	contextTypes: {
-		router: React.PropTypes.object.isRequired
-	},
-	style: {
-		drawer: {
-			paddingTop: "3%"
-		}, iconStyle: {
-			marginRight: 24
-		}
-	},
-	render() {
+	};
+
+	static contextTypes = {
+		router : React.PropTypes.object
+	};
+
+	style = {
+		drawer: {paddingTop: "5%"}, 
+		iconStyle: { marginRight: 24 }, 
+		topList: {marginBottom: "3%"}
+	};
+	
+	componentWillMount() {
+		this.setState({
+			selectedIndex: this.props.defaultValue,
+		});
+	};
+
+	handleChange = (event, index) => {
+		
+		this.setState({ selectedIndex: index });
+		this.context.router.push(index);
+	};
+	
+	render () {
 		return (
 			<Drawer docked={true} containerStyle={this.style.drawer}>
-				<SelectableList onChange={(evt, value) => {
-					this.context.router.push(value);
-				}} value={location.pathname}>
+				<SelectableList style={this.style.topList} 
+					value={this.state.selectedIndex} onChange={this.handleChange}>
 					<Subheader>Categories</Subheader>
 					<ListItem
 						primaryText="ALL POSTS"
 						value="/posts" leftIcon={
 							<FontIcon className="material-icons"
-							style={this.style.iconStyles}>home</FontIcon>
-					}/>
-					{this.props.categories.map(item => {
+								style={this.style.iconStyles}>home</FontIcon>
+						} />
+					{this.props.categories.map((item, index) => {
 						return (
 							<ListItem
+								key={index}
 								primaryText={item.title}
-								value={"/" + item._id + "/1"} leftIcon={
+								value={"/posts/" + item._id + "/1"} leftIcon={
 									<FontIcon className="material-icons"
-									style={this.style.iconStyles}>{item.logo}</FontIcon>
-							}/> );
+										style={this.style.iconStyles}>{item.logo}</FontIcon>
+								} />);
 					})}
 				</SelectableList>
 
@@ -58,11 +70,10 @@ const NavigationMenu = React.createClass({
 				}}>
 					<Subheader>Links</Subheader>
 					<ListItem primaryText="GitHub" value="https://github.com/RoyTimes" leftIcon={<ActionLabel />} />
-					<ListItem primaryText="聚力星系BBS" value="http://stzone.org" leftIcon={<ActionLabel />} />
+					<ListItem primaryText="LinkedIn" value="http://www.linkedin.com/in/songzhou" leftIcon={<ActionLabel />} />
 				</SelectableList>
 			</Drawer>
 		);
 	}
-});
-
+}
 export default NavigationMenu;
