@@ -17,7 +17,7 @@ The system is no longer static. I added a lightweight Node.js + MongoDB server.
 ## Contact Me if you feel interested, because setting up the repo and making it run is not easy right now. As I said, I will add setup scripts by the end of my development.
 
 ## Contact Me
-WeChat: 2590511036
-Telegram: @songzhou28
-Email: zs@ziorix.com songz28@uw.edu
+WeChat: 2590511036<br/>
+Telegram: @songzhou28<br/>
+Email: zs@ziorix.com songz28@uw.edu<br/>
 FB: https://www.facebook.com/song.zhou28 
